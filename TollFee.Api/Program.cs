@@ -29,7 +29,6 @@ namespace TollFee.Api
                 {
                     var context = new TollDBContext(new DbContextOptions<TollDBContext> ());
                     var year = configuration.GetValue<string>("ConfigurableYear");
-                    //var context = services.GetRequiredService<TollDBContext>();
                     new TollSeeding(context).SeedData(int.Parse(year));
                 }
                 catch (Exception ex)
@@ -38,7 +37,6 @@ namespace TollFee.Api
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
-            //CreateHostBuilder(args).Build().Run();
             host.Run();
         }
 

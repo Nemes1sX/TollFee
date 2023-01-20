@@ -25,8 +25,8 @@ namespace TollFee.Api.Models
 
             var holidayYearList = NonRestConstHolidayDays(year);
 
-            /*await*/ _context.TollFrees.AddRange(holidayYearList);
-            /*await*/ _context.SaveChanges();
+            _context.TollFrees.AddRange(holidayYearList);
+            _context.SaveChanges();
         }
 
         private DateTime EasterSunday(int year)
