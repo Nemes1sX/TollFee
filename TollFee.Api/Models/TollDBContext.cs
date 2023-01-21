@@ -20,13 +20,13 @@ namespace TollFee.Api.Models
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<TollFree> TollFrees { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=TollDB;Trusted_Connection=True;");
             }
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
