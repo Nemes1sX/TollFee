@@ -10,7 +10,7 @@ namespace TollFee.Api.Services
     {
         internal static IEnumerable<DateTime> RemoveFree(DateTime[] passages)
         {
-            //var OtherFreeDays = FreeDays();
+            var OtherFreeDays = FreeDays();
 
             foreach (var p in passages)
             {
@@ -19,7 +19,7 @@ namespace TollFee.Api.Services
             }
         }
 
-         internal static DateTime[] OtherFreeDays = new[]
+        /* internal static DateTime[] OtherFreeDays = new[]
          {
              new DateTime(2021, 1, 1),
              new DateTime(2021, 1, 5),
@@ -34,15 +34,15 @@ namespace TollFee.Api.Services
              new DateTime(2021, 11, 5),
              new DateTime(2021, 12, 24),
              new DateTime(2021, 12, 31)
-         };
+         };*/
 
-      /*  private static DateTime[] FreeDays()
+       private static DateTime[] FreeDays()
         {
             using (var context = new TollDBContext())
             {
                 return context.TollFrees.Select(x => x.Date).ToArray();  
             }
-        }*/
+        }
 
     }
 }

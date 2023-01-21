@@ -73,7 +73,7 @@ namespace TollFee.Api.Models
             var NonRestFreeDays = new List<TollFree>();
             foreach (var OthreFreeDay in OtherFreeDays)
             {
-                if (OthreFreeDay.DayOfWeek != DayOfWeek.Saturday || OthreFreeDay.DayOfWeek != DayOfWeek.Sunday)
+                if (OthreFreeDay.DayOfWeek != DayOfWeek.Saturday && OthreFreeDay.DayOfWeek != DayOfWeek.Sunday)
                 {
                     NonRestFreeDays.Add(new TollFree
                     {
