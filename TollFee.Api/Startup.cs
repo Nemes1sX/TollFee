@@ -36,7 +36,7 @@ namespace TollFee.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TollFee.Api", Version = "v1" });
             });
-            services.AddDbContextPool<TollDBContext>(options =>
+            services.AddDbContext<TollDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TollDatabase")));
         }
 
