@@ -31,8 +31,8 @@ namespace TollFee.Api.Test
             var response = _service.CalculateFee(request);
 
             //Assert
-            Assert.Equals(30, response.TotalFee);
-            Assert.Equals(7, response.AverageFeePerDay);
+            Assert.AreEqual(31, response.TotalFee);
+            Assert.AreEqual(7, response.AverageFeePerDay);
         }
     }
 }

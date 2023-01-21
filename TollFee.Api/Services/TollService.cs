@@ -10,7 +10,16 @@ namespace TollFee.Api.Services
     {
         public CalculateFeeResponse CalculateFee(DateTime[] request)
         {
-            throw new NotImplementedException();
+            var notFree = TollFreeService.RemoveFree(request);
+            var totalFee = TollFeeService.GetFee(notFree);
+
+            var response = new CalculateFeeResponse
+            {
+                TotalFee = totalFee,
+                AverageFeePerDay = totalFee / request.Distinct().Count()
+            };
+
+            return response;
         }
     }
 }

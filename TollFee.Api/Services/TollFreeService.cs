@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TollFee.Api.Models;
 
 namespace TollFee.Api.Services
 {
@@ -9,6 +10,8 @@ namespace TollFee.Api.Services
     {
         internal static IEnumerable<DateTime> RemoveFree(DateTime[] passages)
         {
+            //var OtherFreeDays = FreeDays();
+
             foreach (var p in passages)
             {
                 if (p.DayOfWeek != DayOfWeek.Saturday && p.DayOfWeek != DayOfWeek.Sunday && !OtherFreeDays.Contains(p.Date) && p.Month != 7)
@@ -16,21 +19,30 @@ namespace TollFee.Api.Services
             }
         }
 
-        internal static DateTime[] OtherFreeDays = new[]
+         internal static DateTime[] OtherFreeDays = new[]
+         {
+             new DateTime(2021, 1, 1),
+             new DateTime(2021, 1, 5),
+             new DateTime(2021, 1, 6),
+             new DateTime(2021, 4, 1),
+             new DateTime(2021, 4, 2),
+             new DateTime(2021, 4, 5),
+             new DateTime(2021, 4, 30),
+             new DateTime(2021, 5, 12),
+             new DateTime(2021, 5, 13),
+             new DateTime(2021, 6, 25),
+             new DateTime(2021, 11, 5),
+             new DateTime(2021, 12, 24),
+             new DateTime(2021, 12, 31)
+         };
+
+      /*  private static DateTime[] FreeDays()
         {
-            new DateTime(2021, 1, 1),
-            new DateTime(2021, 1, 5),
-            new DateTime(2021, 1, 6),
-            new DateTime(2021, 4, 1),
-            new DateTime(2021, 4, 2),
-            new DateTime(2021, 4, 5),
-            new DateTime(2021, 4, 30),
-            new DateTime(2021, 5, 12),
-            new DateTime(2021, 5, 13),
-            new DateTime(2021, 6, 25),
-            new DateTime(2021, 11, 5),
-            new DateTime(2021, 12, 24),
-            new DateTime(2021, 12, 31)
-        };
+            using (var context = new TollDBContext())
+            {
+                return context.TollFrees.Select(x => x.Date).ToArray();  
+            }
+        }*/
+
     }
 }
