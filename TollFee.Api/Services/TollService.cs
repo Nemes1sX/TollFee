@@ -8,9 +8,16 @@ namespace TollFee.Api.Services
 {
     public class TollService : ITollService
     {
+        private TollFreeService _tollFreeService;
+
+        public TollService(TollFreeService tollFreeService) 
+        {
+           _tollFreeService = tollFreeService;
+        }
+
         public CalculateFeeResponse CalculateFee(DateTime[] request)
         {
-            var notFree = TollFreeService.RemoveFree(request);
+            var notFree = _tollFreeService.RemoveFree(request);
             var totalFee = TollFeeService.GetFee(notFree);
 
             var response = new CalculateFeeResponse

@@ -6,9 +6,16 @@ using TollFee.Api.Models;
 
 namespace TollFee.Api.Services
 {
-    public static class TollFreeService
+    public class TollFreeService
     {
-        internal static IEnumerable<DateTime> RemoveFree(DateTime[] passages)
+        private readonly TollDBContext _dbContext;
+
+        public TollFreeService(TollDBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        internal IEnumerable<DateTime> RemoveFree(DateTime[] passages)
         {
             var OtherFreeDays = FreeDays();
 
@@ -36,12 +43,10 @@ namespace TollFee.Api.Services
              new DateTime(2021, 12, 31)
          };*/
 
-       private static DateTime[] FreeDays()
+       private  DateTime[] FreeDays()
         {
-            using (var context = new TollDBContext())
-            {
-                return context.TollFrees.Select(x => x.Date).ToArray();  
-            }
+                return _dbContext.TollFrees.Select(x => x.Date).ToArray();  
+
         }
 
     }
