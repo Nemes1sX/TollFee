@@ -64,6 +64,23 @@ namespace TollFee.Api.Test
             Assert.AreEqual(0, response.AverageFeePerDay);
         }
 
+        [Test]
+        public void TollService_CalculateToll_Max60SKDay()
+        {
+            //Arrange
+            var request = new List<DateTime>
+            {
+             new DateTime (2021, 1, 8, 6, 30, 1),
+             new DateTime (2021, 1, 8, 7, 30, 1),  
+             new DateTime (2021, 1, 8, 15, 30, 1),  
+             new DateTime (2021, 1, 8, 16, 30, 1),
+            }.ToArray();
 
+            //Act
+            var response = _service.CalculateFee(request);
+
+            //Assert
+            Assert.AreEqual(60, response.TotalFee);
+        }
     }
 }
