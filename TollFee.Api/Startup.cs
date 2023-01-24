@@ -25,7 +25,7 @@ namespace TollFee.Api
         {
 
             services.AddTransient<ITollService, TollService>();
-            services.AddTransient<IConfigService, ConfigService>();
+            services.AddSingleton<IConfigService, ConfigService>();
             services.AddTransient<TollFreeService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -6,19 +6,11 @@ namespace TollFee.Api.Config
 {
     public class ConfigService : IConfigService
     {
-        private readonly CustomConfig _customConfig;
-
-        public ConfigService(CustomConfig customConfig)
-        {
-            _customConfig = customConfig;
-        }
-
         public void SetYear(int year)
         {
-            //_configs.ConfigurableYear = year;
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("customsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build()
                 .Get<CustomConfig>();
