@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.IO;
 using TollFee.Api.Models;
 
 namespace TollFee.Api
@@ -18,8 +19,9 @@ namespace TollFee.Api
         {
             var host = CreateHostBuilder(args).Build();
             configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("customsettings.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
             .Build();
 
             using (var scope = host.Services.CreateScope())
@@ -28,8 +30,8 @@ namespace TollFee.Api
                 try
                 {
                     var context = new TollDBContext(new DbContextOptions<TollDBContext> ());
-                    var year = configuration.GetValue<string>("ConfigurableYear");
-                    new TollSeeding(context).SeedData(int.Parse(year));
+                    var year = configuration.GetValue<int>("ConfigurableYear");
+                    new TollSeeding(context).SeedData(year);
                 }
                 catch (Exception ex)
                 {
